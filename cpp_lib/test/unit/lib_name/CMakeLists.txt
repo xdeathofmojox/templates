@@ -9,6 +9,7 @@ project(${PROJECT_NAME} VERSION ${PROJECT_VERSION} LANGUAGES CXX)
 
 # create library
 list(APPEND TEST_SRCS
+    # TODO: Replace sample code
     sample_test
 )
 
@@ -21,8 +22,8 @@ add_executable(${TEST_NAME} ${TEST_SRCS})
 # target_include_directories(${LIBRARY_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/include>)
 
 # target link libraries
-# TODO: Rename lib_name
 find_package(GTest REQUIRED)
+# TODO: Rename lib_name
 find_package(lib_name REQUIRED)
 target_link_libraries(${TEST_NAME} PRIVATE lib_name::lib_name GTest::gmock GTest::gtest_main)
 

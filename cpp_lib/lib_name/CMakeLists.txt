@@ -13,6 +13,7 @@ project(${PROJECT_NAME} VERSION ${PROJECT_VERSION} LANGUAGES CXX)
 
 # create library
 list(APPEND SRC_LIST
+    # TODO: Replace sample code
     sample
 )
 
