@@ -26,6 +26,9 @@ CMakeFiles/
 *.opendb
 *.pdb
 
+# Direnv
+.direnv/
+
 # Other temporary files
 *~
 *.swp
