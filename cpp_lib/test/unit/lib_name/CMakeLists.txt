@@ -22,6 +22,8 @@ add_executable(${TEST_NAME} ${TEST_SRCS})
 
 # target link libraries
 # TODO: Rename lib_name
+find_package(GTest REQUIRED)
+find_package(lib_name REQUIRED)
 target_link_libraries(${TEST_NAME} PRIVATE lib_name::lib_name GTest::gmock GTest::gtest_main)
 
 # compiler optimization

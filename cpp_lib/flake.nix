@@ -54,7 +54,7 @@
             default = lib-name-unit-tests;
             lib-name-unit-tests = {
               type = "app";
-              program = "${pkgs.lib-name-unit-tests}/bin/lib-name-unit-tests";
+              program = "${pkgs.lib-name-unit-tests}/bin/lib_name_unit_tests";
             };
           };
 
