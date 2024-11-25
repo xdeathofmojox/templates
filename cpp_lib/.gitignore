@@ -1,0 +1,32 @@
+# Build artifacts
+build/
+*.o
+*.so
+*.a
+*.dylib
+*.dll
+*.exe
+
+# CMake generated files
+CMakeCache.txt
+CMakeFiles/
+*.cmake
+
+# IDE-specific files
+.vscode/
+*.sln
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.user
+*.suo
+*.ncb
+*.user
+*.aps
+*.idb
+*.opendb
+*.pdb
+
+# Other temporary files
+*~
+*.swp
+*.bak
