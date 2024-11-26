@@ -28,11 +28,11 @@
         # TODO: Rename lib-name
         inherit lib-name-version;
         # TODO: Rename lib-name and lib_name
-        lib-name = final.callPackage ./lib_name {};
+        lib-name = final.callPackage ./lib-name {};
         # TODO: Rename lib-name
         lib-name-static = lib-name.override { static = true; };
         # TODO: Rename lib-name and lib_name
-        lib-name-unit-tests = final.callPackage ./test/unit/lib_name {};
+        lib-name-unit-tests = final.callPackage ./test/unit/lib-name {};
       };
     };
 
@@ -62,16 +62,16 @@
             lib-name-unit-tests = {
               type = "app";
               # TODO: Rename lib-name and lib_name
-              program = "${pkgs.lib-name-unit-tests}/bin/lib_name_unit_tests";
+              program = "${pkgs.lib-name-unit-tests}/bin/lib-name-unit-tests";
             };
           };
 
           formatter = pkgs.nixfmt-rfc-style;
 
           # TODO: Rename lib_name
-          devShells.default = pkgs.callPackage ./lib_name/devenv.nix { };
+          devShells.default = pkgs.callPackage ./lib-name/devenv.nix { };
           # TODO: Rename lib-name and lib_name
-          devShells.lib-name-unit-tests = pkgs.callPackage ./test/unit/lib_name/devenv.nix { };
+          devShells.lib-name-unit-tests = pkgs.callPackage ./test/unit/lib-name/devenv.nix { };
         }
     )) // { inherit overlays; };
 }

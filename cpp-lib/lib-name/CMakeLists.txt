@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.13.0)
 # setup
 set(PROJECT_NAME "DefaultProjectName" CACHE STRING "Project Name")
 set(PROJECT_VERSION "0.0.0" CACHE STRING "Project Version")
-set(LIBRARY_NAME "lib_name" CACHE STRING "Library Name")
+set(LIBRARY_NAME "lib-name" CACHE STRING "Library Name")
 set(LIB_TYPE "SHARED")
 if(BUILD_STATIC)
     set(LIB_TYPE "STATIC")

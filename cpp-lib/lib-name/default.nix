@@ -7,8 +7,8 @@
 }:
 
 stdenv.mkDerivation rec {
-  # TODO: Rename lib_name
-  pname = "lib_name";
+  # TODO: Rename lib-name
+  pname = "lib-name";
   # TODO: Rename lib-name
   version = "v${lib-name-version.major}.${lib-name-version.minor}.${lib-name-version.patch}";
   src = ./.;

@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include <lib_name/sample.h>
+#include <lib-name/sample.h>
 
 using namespace lib_name;
 

@@ -3,12 +3,12 @@
 
   outputs = {self }: {
     templates = {
-      cpp_lib = {
-        path = ./cpp_lib;
+      cpp-lib = {
+        path = ./cpp-lib;
         description = "A c++ library templates";
       };
     };
 
-    templates.default = self.templates.cpp_lib;
+    templates.default = self.templates.cpp-lib;
   };
 }

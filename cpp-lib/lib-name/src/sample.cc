@@ -1,4 +1,4 @@
-#include "lib_name/sample.h"
+#include "lib-name/sample.h"
 
 namespace lib_name {
     void Sample::SetX(const int new_value) {
