@@ -22,7 +22,6 @@ stdenv.mkDerivation rec {
   ];
   outputs = [
     "out"
-    "dev"
   ];
 
   cmakeFlags = [

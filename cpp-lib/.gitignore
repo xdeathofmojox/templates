@@ -10,7 +10,6 @@ build/
 # CMake generated files
 CMakeCache.txt
 CMakeFiles/
-*.cmake
 
 # IDE-specific files
 .vscode/
@@ -33,3 +32,7 @@ CMakeFiles/
 *~
 *.swp
 *.bak
+
+# Nix specific
+result
+result-dev

@@ -24,7 +24,7 @@
     };
 
     overlays = {
-      default = final: priv: rec {
+      default = final: prev: rec {
         # TODO: Rename lib-name
         inherit lib-name-version;
         # TODO: Rename lib-name and lib_name
