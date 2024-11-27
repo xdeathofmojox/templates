@@ -1,9 +1,9 @@
 {
-  pkgs ? import <nixpkgs> {},
+  pkgs ? import <nixpkgs> { },
   cmake,
   gtest,
   # TODO: Rename lib-name
-  lib-name
+  lib-name,
 }:
 
 pkgs.mkShell {
