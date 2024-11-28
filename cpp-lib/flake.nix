@@ -44,6 +44,7 @@
           # TODO: Rename lib-name
           overlays = nixpkgs.lib.attrValues overlays;
         };
+        # TODO: Rename lib-name
         private-lib-name-unit-tests = pkgs.callPackage ./test/unit/lib-name { };
       in
       {
@@ -64,6 +65,10 @@
           # TODO: Rename lib-name
           lib-name-unit-tests = {
             type = "app";
+            meta = {
+              description = "My library unit tests";
+              owner = "xdeathofmojox";
+            };
             # TODO: Rename lib-name
             program = "${private-lib-name-unit-tests}/bin/lib-name-unit-tests";
           };
