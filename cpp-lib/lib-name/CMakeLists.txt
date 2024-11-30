@@ -57,6 +57,12 @@ endif()
 target_compile_options(${LIBRARY_NAME} PRIVATE -O1)
 
 #########################################
+# export compile commands
+#########################################
+set_target_properties(${LIBRARY_NAME} 
+    PROPERTIES EXPORT_COMPILE_COMMANDS ON)
+
+#########################################
 # target c++ 20
 #########################################
 target_compile_features(${LIBRARY_NAME} PRIVATE cxx_std_20)
@@ -87,9 +93,9 @@ install(EXPORT ${LIBRARY_NAME}Targets
     DESTINATION lib/cmake/${LIBRARY_NAME})
 
 include(CMakePackageConfigHelpers)
-write_basic_package_version_file("${CMAKE_CURRENT_LIST_DIR}/${LIBRARY_NAME}ConfigVersion.cmake"
+write_basic_package_version_file("${CMAKE_BINARY_DIR}/${LIBRARY_NAME}ConfigVersion.cmake"
     VERSION ${PROJECT_VERSION}
     COMPATIBILITY SameMajorVersion)
 
-install(FILES "${LIBRARY_NAME}Config.cmake" "${LIBRARY_NAME}ConfigVersion.cmake"
+install(FILES "${LIBRARY_NAME}Config.cmake" "${CMAKE_BINARY_DIR}/${LIBRARY_NAME}ConfigVersion.cmake" "${CMAKE_BINARY_DIR}/compile_commands.json"
     DESTINATION lib/cmake/${LIBRARY_NAME})

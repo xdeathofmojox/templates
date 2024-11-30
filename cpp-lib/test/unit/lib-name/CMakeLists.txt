@@ -48,6 +48,12 @@ target_link_libraries(${TEST_NAME} PRIVATE
 target_compile_options(${TEST_NAME} PRIVATE -O1)
 
 #########################################
+# export compile commands
+#########################################
+set_target_properties(${TEST_NAME} 
+    PROPERTIES EXPORT_COMPILE_COMMANDS ON)
+
+#########################################
 # target c++ 20
 #########################################
 target_compile_features(${TEST_NAME} PRIVATE cxx_std_20)
@@ -56,3 +62,9 @@ target_compile_features(${TEST_NAME} PRIVATE cxx_std_20)
 # install test
 #########################################
 install(TARGETS ${TEST_NAME} DESTINATION "${CMAKE_INSTALL_PREFIX}/bin")
+
+#########################################
+# install cmake configs
+#########################################
+install(FILES "${CMAKE_BINARY_DIR}/compile_commands.json"
+    DESTINATION lib/cmake/${TEST_NAME})
