@@ -41,7 +41,6 @@
       let
         pkgs = import nixpkgs {
           inherit system;
-          # TODO: Rename lib-name
           overlays = nixpkgs.lib.attrValues overlays;
         };
         # TODO: Rename lib-name
@@ -76,7 +75,7 @@
 
         formatter = pkgs.nixfmt-rfc-style;
 
-        # TODO: Rename lib_name
+        # TODO: Rename lib-name
         devShells.default = pkgs.callPackage ./lib-name/devenv.nix { };
         # TODO: Rename lib-name
         devShells.lib-name-unit-tests = pkgs.callPackage ./test/unit/lib-name/devenv.nix { };

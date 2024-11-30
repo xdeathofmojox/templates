@@ -34,10 +34,11 @@ add_executable(${TEST_NAME} ${SRC_LIST})
 # target link libraries
 #########################################
 find_package(GTest REQUIRED)
-# TODO: Rename lib_name
+# TODO: Rename lib-name
 find_package(lib-name REQUIRED)
 
 target_link_libraries(${TEST_NAME} PRIVATE 
+    # TODO: Rename lib-name
     lib-name::lib-name
     GTest::gmock
     GTest::gtest_main)

@@ -5,6 +5,7 @@ cmake_minimum_required(VERSION 3.13.0)
 #########################################
 set(PROJECT_NAME "DefaultProjectName" CACHE STRING "Project Name")
 set(PROJECT_VERSION "0.0.0" CACHE STRING "Project Version")
+# TODO: Rename lib-name
 set(LIBRARY_NAME "lib-name" CACHE STRING "Library Name")
 set(LIB_TYPE "SHARED")
 if(BUILD_STATIC)
