@@ -36,3 +36,6 @@ CMakeFiles/
 # Nix specific
 result
 result-dev
+
+# Clang specific
+*/clang-tidy-fixes.yaml
