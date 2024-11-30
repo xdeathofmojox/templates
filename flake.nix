@@ -5,7 +5,12 @@
     templates = {
       cpp-lib = {
         path = ./cpp-lib;
-        description = "A c++ library templates";
+        description = "A c++ library template";
+      };
+
+      cpp-exec = {
+        path = ./cpp-exec;
+        description = "A c++ executable template";
       };
     };
 
