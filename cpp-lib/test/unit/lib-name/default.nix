@@ -19,11 +19,9 @@ stdenv.mkDerivation rec {
     description = "My library unit tests";
     owner = "xdeathofmojox";
   };
-  nativeBuildInputs = [
+  buildInputs = [
     cmake
     gtest
-  ];
-  buildInputs = [
     # TODO: Rename lib-name
     lib-name
   ];
@@ -32,7 +30,7 @@ stdenv.mkDerivation rec {
     "-DPROJECT_NAME=${pname}"
     # TODO: Rename lib-name
     "-DPROJECT_VERSION=${lib-name-version.major}.${lib-name-version.minor}.${lib-name-version.patch}"
-    "-DTEST_NAME=${pname}"
+    "-DTARGET_NAME=${pname}"
   ];
 
   outputs = [ "out" ];

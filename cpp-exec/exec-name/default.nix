@@ -16,7 +16,7 @@ stdenv.mkDerivation rec {
     description = "My Executable";
     owner = "xdeathofmojox";
   };
-  nativeBuildInputs = [
+  buildInputs = [
     cmake
   ];
   outputs = [
@@ -28,6 +28,6 @@ stdenv.mkDerivation rec {
     "-DPROJECT_NAME=${pname}"
     # TODO: Rename exec-name
     "-DPROJECT_VERSION=${exec-name-version.major}.${exec-name-version.minor}.${exec-name-version.patch}"
-    "-DEXEC_NAME=${pname}"
+    "-DTARGET_NAME=${pname}"
   ];
 }
