@@ -12,6 +12,11 @@
         path = ./cpp-exec;
         description = "A c++ executable template";
       };
+
+      rust-cargo-workspace = {
+        path = ./rust-cargo-workspace;
+        description = "A rust cargo workspace";
+      };
     };
 
     templates.default = self.templates.cpp-lib;
