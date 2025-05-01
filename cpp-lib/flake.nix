@@ -35,29 +35,9 @@
         );
     in
     {
-      packages = forEachSupportedSystem (
-        { pkgs }:
-        {
-          # TODO: Rename lib-name
-          default = pkgs.lib-name;
-          # TODO: Rename lib-name
-          lib-name = pkgs.lib-name;
-          # TODO: Rename lib-name
-          lib-name-unit-tests = pkgs.callPackage ./test/unit/lib-name { };
-        }
-      );
+      packages = forEachSupportedSystem (import ./package.nix);
 
-      devShells = forEachSupportedSystem (
-        { pkgs }:
-        rec {
-          # TODO: Rename lib-name
-          default = lib-name;
-          # TODO: Rename lib-name
-          lib-name = pkgs.callPackage ./lib-name/devenv.nix { };
-          # TODO: Rename lib-name
-          lib-name-unit-tests = pkgs.callPackage ./test/unit/lib-name/devenv.nix { };
-        }
-      );
+      devShells = forEachSupportedSystem (import ./devshell.nix);
 
       formatter = forEachSupportedSystem ({ pkgs }: pkgs.nixfmt-rfc-style);
 
