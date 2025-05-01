@@ -15,31 +15,14 @@
     }:
 
     let
-      supportedSystems = [
-        "x86_64-linux"
-        "aarch64-linux"
-        "x86_64-darwin"
-        "aarch64-darwin"
-      ];
-      forEachSupportedSystem =
-        f:
-        nixpkgs.lib.genAttrs supportedSystems (
-          system:
-          f {
-            pkgs = import nixpkgs {
-              inherit system;
-              overlays = [ self.overlays.default ];
-              config = { };
-            };
-          }
-        );
+      lib = import ./lib.nix { inherit nixpkgs self; };
     in
     {
-      packages = forEachSupportedSystem (import ./package.nix);
+      packages = lib.forEachSupportedSystem (import ./packages.nix);
 
-      devShells = forEachSupportedSystem (import ./devshell.nix);
+      devShells = lib.forEachSupportedSystem (import ./devshells.nix);
 
-      formatter = forEachSupportedSystem ({ pkgs }: pkgs.nixfmt-rfc-style);
+      formatter = lib.forEachSupportedSystem ({ pkgs }: pkgs.nixfmt-rfc-style);
 
       overlays.default = import ./overlay.nix;
 
