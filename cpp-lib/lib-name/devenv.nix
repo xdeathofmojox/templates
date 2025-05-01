@@ -9,4 +9,5 @@ pkgs.mkShell {
     cmake
     clang-tools
   ];
+  shellHook = "";
 }

@@ -15,4 +15,5 @@ pkgs.mkShell {
     # TODO: Rename lib-name
     lib-name
   ];
+  shellHook = "";
 }
