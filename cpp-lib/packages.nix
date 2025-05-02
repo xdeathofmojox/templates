@@ -1,4 +1,4 @@
-{ pkgs }:
+{ pkgs, ... }:
 {
   # TODO: Rename lib-name
   default = pkgs.lib-name;

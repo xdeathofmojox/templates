@@ -15,14 +15,16 @@
     }:
 
     let
-      lib = import ./lib.nix { inherit nixpkgs self; };
+      lib = import ./lib.nix { inherit self nixpkgs; };
     in
     {
-      packages = lib.forEachSupportedSystem (import ./packages.nix);
+      packages = lib.forEachSupportedSystem (args: import ./packages.nix args);
 
-      devShells = lib.forEachSupportedSystem (import ./devshells.nix);
+      apps = lib.forEachSupportedSystem (args: import ./apps.nix args);
 
-      formatter = lib.forEachSupportedSystem ({ pkgs }: pkgs.nixfmt-rfc-style);
+      devShells = lib.forEachSupportedSystem (args: import ./devshells.nix args);
+
+      formatter = lib.forEachSupportedSystem (args: args.pkgs.nixfmt-rfc-style);
 
       overlays.default = import ./overlay.nix;
 
