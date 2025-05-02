@@ -4,7 +4,6 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
-    flake-utils.url = "github:numtide/flake-utils";
 
     # Add more flakes here
   };
@@ -13,71 +12,19 @@
     {
       self,
       nixpkgs,
-      flake-utils,
     }:
 
     let
-      # TODO: Rename exec-name
-      exec-name-version = {
-        major = "0";
-        minor = "0";
-        patch = "0";
-      };
-
-      overlays = {
-        default = final: prev: rec {
-          # TODO: Rename exec-name
-          inherit exec-name-version;
-          # TODO: Rename lib-name
-          exec-name = final.callPackage ./exec-name { };
-        };
-      };
-
+      lib = import ./lib.nix { inherit nixpkgs self; };
     in
-    (flake-utils.lib.eachDefaultSystem (
-      system:
-      let
-        pkgs = import nixpkgs {
-          inherit system;
-          overlays = nixpkgs.lib.attrValues overlays;
-        };
-      in
-      {
-        legacyPackages = pkgs;
+    {
+      packages = lib.forEachSupportedSystem (import ./packages.nix);
 
-        packages = {
-          # TODO: Rename exec-name
-          default = pkgs.exec-name;
-          # TODO: Rename exec-name
-          exec-name = pkgs.exec-name;
-        };
+      devShells = lib.forEachSupportedSystem (import ./devshells.nix);
 
-        apps = rec {
-          # TODO: Rename exec-name
-          default = exec-name;
-          # TODO: Rename exec-name
-          exec-name = {
-            type = "app";
-            meta = {
-              description = "My executable";
-              owner = "xdeathofmojox";
-            };
-            # TODO: Rename exec-name
-            program = "${pkgs.exec-name}/bin/exec-name";
-          };
-        };
+      formatter = lib.forEachSupportedSystem ({ pkgs }: pkgs.nixfmt-rfc-style);
 
-        formatter = pkgs.nixfmt-rfc-style;
+      overlays.default = import ./overlay.nix;
 
-        devShells = rec {
-          # TODO: Rename exec-name
-          default = exec-name;
-          # TODO: Rename exec-name
-          exec-name = pkgs.callPackage ./exec-name/devenv.nix { };
-        };
-      }
-    ))
-    // {
-      inherit overlays;
     };
 }
