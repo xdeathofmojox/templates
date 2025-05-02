@@ -1,4 +1,4 @@
-{ nixpkgs, self }:
+{ self, nixpkgs }:
 
 let
   supportedSystems = [
@@ -12,12 +12,15 @@ let
     f:
     nixpkgs.lib.genAttrs supportedSystems (
       system:
-      f {
+      let
         pkgs = import nixpkgs {
           inherit system;
           overlays = [ self.overlays.default ];
           config = { };
         };
+      in
+      f {
+        inherit self system pkgs;
       }
     );
 in
