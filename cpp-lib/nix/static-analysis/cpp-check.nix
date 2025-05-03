@@ -1,8 +1,8 @@
-{ stdenv, cppcheck, ... }:
+{ stdenv, cppcheck, src, ... }:
 
 stdenv.mkDerivation {
   name = "cpp-check";
-  src = ./..;
+  inherit src;
 
   nativeBuildInputs = [ cppcheck ];
 

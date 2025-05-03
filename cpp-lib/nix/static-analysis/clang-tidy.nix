@@ -1,8 +1,8 @@
-{ stdenv, clang-tools, cmake, ... }:
+{ stdenv, clang-tools, cmake, src, ... }:
 
 stdenv.mkDerivation {
   name = "clang-tidy";
-  src = ./..;
+  inherit src;
   dontConfigure = true;
 
   nativeBuildInputs = [ clang-tools cmake ];
@@ -21,8 +21,6 @@ stdenv.mkDerivation {
       modernize-*,\
       performance-*"
 
-    ls .
-
     find src \
         -name "*.cc" \
         -o -name "*.cpp" | \
@@ -36,7 +34,6 @@ stdenv.mkDerivation {
 
   installPhase = ''
     mkdir -p $out/results
-    ls .
     if [ -f clang-tidy-fixes.yaml ]; then
       cp clang-tidy-fixes.yaml $out/results
     else
