@@ -3,5 +3,12 @@
 version = 4
 
 [[package]]
-name = "example"
+name = "exec_name"
+version = "0.1.0"
+dependencies = [
+ "lib_name",
+]
+
+[[package]]
+name = "lib_name"
 version = "0.1.0"

@@ -4,33 +4,19 @@
 
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable";
-    flake-utils.url = "github:numtide/flake-utils";
-    fenix.url = "github:nix-community/fenix";
   };
 
-  outputs = { self, nixpkgs, flake-utils, fenix }:
-    flake-utils.lib.eachDefaultSystem (system:
-      let
-        pkgs = import nixpkgs { inherit system; };
-        rustToolchain = fenix.packages.${system}.stable.toolchain;
-      in {
-        packages.default = pkgs.rustPlatform.buildRustPackage {
-          pname = "my-workspace";
-          version = "0.1.0";
-          src = ./.;
-          cargoLock.lockFile = ./Cargo.lock;
-        };
+  outputs =
+    { self, nixpkgs }:
+    let
+      lib = import ./lib.nix { inherit self nixpkgs; };
+    in
+    {
+      packages = lib.forEachSupportedSystem (args: import ./packages.nix args);
+      apps = lib.forEachSupportedSystem (args: import ./apps.nix args);
+      formatter = lib.forEachSupportedSystem (args: args.pkgs.nixfmt-rfc-style);
+      devShells = lib.forEachSupportedSystem (args: import ./devshells.nix args);
 
-        devShells.default = pkgs.mkShell {
-          packages = [
-            rustToolchain
-            pkgs.cargo-watch
-            pkgs.clippy
-          ];
-          shellHook = ''
-            echo "Rust development environment loaded!"
-          '';
-        };
-      }
-    );
+      overlays.default = import ./overlay.nix;
+    };
 }
