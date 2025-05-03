@@ -9,6 +9,6 @@ class Sample {
   virtual int GetX() const;
 
  private:
-  int x;
+  int x {0};
 };
 }  // namespace lib_name
