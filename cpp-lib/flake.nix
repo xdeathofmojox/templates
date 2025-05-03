@@ -4,7 +4,6 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
-    flake-utils.url = "github:numtide/flake-utils";
 
     # Add more flakes here
   };
@@ -13,79 +12,21 @@
     {
       self,
       nixpkgs,
-      flake-utils,
     }:
 
     let
-      # TODO: Rename lib-name
-      lib-name-version = {
-        major = "0";
-        minor = "0";
-        patch = "0";
-      };
-
-      overlays = {
-        default = final: prev: rec {
-          # TODO: Rename lib-name
-          inherit lib-name-version;
-          # TODO: Rename lib-name
-          lib-name = final.callPackage ./lib-name { };
-          # TODO: Rename lib-name
-          lib-name-static = lib-name.override { static = true; };
-        };
-      };
-
+      lib = import ./lib.nix { inherit self nixpkgs; };
     in
-    (flake-utils.lib.eachDefaultSystem (
-      system:
-      let
-        pkgs = import nixpkgs {
-          inherit system;
-          overlays = nixpkgs.lib.attrValues overlays;
-        };
-        # TODO: Rename lib-name
-        private-lib-name-unit-tests = pkgs.callPackage ./test/unit/lib-name { };
-      in
-      {
-        legacyPackages = pkgs;
+    {
+      packages = lib.forEachSupportedSystem (args: import ./packages.nix args);
 
-        packages = {
-          # TODO: Rename lib-name
-          default = pkgs.lib-name;
-          # TODO: Rename lib-name
-          lib-name = pkgs.lib-name;
-          # TODO: Rename lib-name
-          lib-name-unit-tests = private-lib-name-unit-tests;
-        };
+      apps = lib.forEachSupportedSystem (args: import ./apps.nix args);
 
-        apps = rec {
-          # TODO: Rename lib-name
-          default = lib-name-unit-tests;
-          # TODO: Rename lib-name
-          lib-name-unit-tests = {
-            type = "app";
-            meta = {
-              description = "My library unit tests";
-              owner = "xdeathofmojox";
-            };
-            # TODO: Rename lib-name
-            program = "${private-lib-name-unit-tests}/bin/lib-name-unit-tests";
-          };
-        };
+      devShells = lib.forEachSupportedSystem (args: import ./devshells.nix args);
 
-        formatter = pkgs.nixfmt-rfc-style;
+      formatter = lib.forEachSupportedSystem (args: args.pkgs.nixfmt-rfc-style);
 
-        devShells = rec {
-          # TODO: Rename lib-name
-          default = lib-name;
-          # TODO: Rename lib-name
-          lib-name = pkgs.callPackage ./lib-name/devenv.nix { };
-          # TODO: Rename lib-name
-          lib-name-unit-tests = pkgs.callPackage ./test/unit/lib-name/devenv.nix { };
-        };
-      }
-    ))
-    // {
-      inherit overlays;
+      overlays.default = import ./overlay.nix;
+
     };
 }
