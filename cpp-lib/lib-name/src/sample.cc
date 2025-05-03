@@ -3,5 +3,5 @@
 namespace lib_name {
 void Sample::SetX(const int new_value) { x = new_value; }
 
-int Sample::GetX() const { return x; }
+auto Sample::GetX() const -> int { return x; }
 }  // namespace lib_name
