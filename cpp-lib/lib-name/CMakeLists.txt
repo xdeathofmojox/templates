@@ -12,9 +12,46 @@ if(BUILD_STATIC)
     set(LIB_TYPE "STATIC")
 endif()
 
+# Default to Debug build if not specified
+if(NOT CMAKE_BUILD_TYPE)
+    set(CMAKE_BUILD_TYPE Debug CACHE STRING "Build type" FORCE)
+endif()
+
 project(${PROJECT_NAME} 
     VERSION ${PROJECT_VERSION} 
     LANGUAGES CXX)
+
+#########################################
+# Sanitizer Options
+#########################################
+# Allow specifying sanitizers
+option(ENABLE_ASAN "Enable AddressSanitizer" OFF)
+option(ENABLE_MSAN "Enable MemorySanitizer" OFF)
+option(ENABLE_TSAN "Enable ThreadSanitizer" OFF)
+option(ENABLE_UBSAN "Enable UndefinedBehaviorSanitizer" OFF)
+
+message(STATUS "Build type: ${CMAKE_BUILD_TYPE}")
+message(STATUS "ASAN: ${ENABLE_ASAN}, MSAN: ${ENABLE_MSAN}, TSAN: ${ENABLE_TSAN}, UBSAN: ${ENABLE_UBSAN}")
+if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+    message(STATUS "Sanitizers will be applied")
+else()
+    message(STATUS "Sanitizers will not be applied in non-debug build type")
+endif()
+
+# Setup compile flags for sanitizers
+set(SANITIZER_FLAGS "")
+if(ENABLE_ASAN)
+    list(APPEND SANITIZER_FLAGS "-fsanitize=address")
+endif()
+if(ENABLE_MSAN)
+    list(APPEND SANITIZER_FLAGS "-fsanitize=memory")
+endif()
+if(ENABLE_TSAN)
+    list(APPEND SANITIZER_FLAGS "-fsanitize=thread")
+endif()
+if(ENABLE_UBSAN)
+    list(APPEND SANITIZER_FLAGS "-fsanitize=undefined")
+endif()
 
 #########################################
 # create library
@@ -55,7 +92,26 @@ endif()
 #########################################
 # compiler optimization
 #########################################
-target_compile_options(${TARGET_NAME} PRIVATE -O1)
+if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+    target_compile_options(${TARGET_NAME} PRIVATE -Og)
+else()
+    target_compile_options(${TARGET_NAME} PRIVATE -O3)
+endif()
+
+#########################################
+# debug symbols
+#########################################
+if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+    target_compile_options(${TARGET_NAME} PRIVATE -g)
+endif()
+
+#########################################
+# sanitizers
+#########################################
+if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+    target_compile_options(${TARGET_NAME} PRIVATE ${SANITIZER_FLAGS})
+    target_link_options(${TARGET_NAME} PRIVATE ${SANITIZER_FLAGS})
+endif()
 
 #########################################
 # export compile commands
