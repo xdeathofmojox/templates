@@ -1,4 +1,9 @@
-{ self, system, pkgs, ... }:
+{
+  self,
+  system,
+  pkgs,
+  ...
+}:
 rec {
   # TODO: Rename lib-name
   default = lib-name-unit-tests;
@@ -26,6 +31,11 @@ rec {
       description = "Clang format fix";
       owner = "xdeathofmojox";
     };
-    program = "${import ./nix/tools/clang-format.nix { inherit pkgs; in_place = true; }}/bin/clang-format";
+    program = "${
+      import ./nix/tools/clang-format.nix {
+        inherit pkgs;
+        in_place = true;
+      }
+    }/bin/clang-format";
   };
 }

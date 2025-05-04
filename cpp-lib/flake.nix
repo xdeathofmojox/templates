@@ -18,6 +18,8 @@
       lib = import ./lib.nix { inherit self nixpkgs; };
     in
     {
+      legacyPackages = lib.forEachSupportedSystem (args: args.pkgs);
+
       packages = lib.forEachSupportedSystem (args: import ./packages.nix args);
 
       apps = lib.forEachSupportedSystem (args: import ./apps.nix args);
