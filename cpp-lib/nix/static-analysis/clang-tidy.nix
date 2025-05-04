@@ -1,11 +1,20 @@
-{ stdenv, clang-tools, cmake, src, ... }:
+{
+  stdenv,
+  clang-tools,
+  cmake,
+  src,
+  ...
+}:
 
 stdenv.mkDerivation {
   name = "clang-tidy";
   inherit src;
   dontConfigure = true;
 
-  nativeBuildInputs = [ clang-tools cmake ];
+  nativeBuildInputs = [
+    clang-tools
+    cmake
+  ];
 
   buildPhase = ''
     echo "Running clang tidy..."

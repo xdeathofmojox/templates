@@ -1,4 +1,9 @@
-{ stdenv, cppcheck, src, ... }:
+{
+  stdenv,
+  cppcheck,
+  src,
+  ...
+}:
 
 stdenv.mkDerivation {
   name = "cpp-check";
@@ -8,7 +13,16 @@ stdenv.mkDerivation {
 
   buildPhase = ''
     echo "Running cppcheck..."
-    cppcheck --enable=all --xml --output-file=cppcheck_report.xml --inconclusive --std=c++20 -I include src
+    cppcheck \
+      --enable=all \
+      --suppress=missingIncludeSystem \
+      --suppress=unmatchedSuppression \
+      --xml \
+      --output-file=cppcheck_report.xml \
+      --inconclusive \
+      --std=c++20 \
+      -I include \
+      src
     cppcheck-htmlreport --file=cppcheck_report.xml --report-dir=html_report --source-dir=.
   '';
 
