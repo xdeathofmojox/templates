@@ -97,6 +97,12 @@ if(CMAKE_BUILD_TYPE STREQUAL "Debug")
 endif()
 
 #########################################
+# warnings
+#########################################
+target_compile_options(${TARGET_NAME} PRIVATE -Wall -Wextra -Wpedantic)
+target_compile_options(${TARGET_NAME} PRIVATE -Werror)
+
+#########################################
 # sanitizers
 #########################################
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
