@@ -1,4 +1,9 @@
-{ self, system, pkgs, ... }:
+{
+  self,
+  system,
+  pkgs,
+  ...
+}:
 rec {
   # TODO: Rename exec-name
   default = exec-name;
