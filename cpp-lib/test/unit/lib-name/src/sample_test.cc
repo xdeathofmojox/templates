@@ -4,10 +4,10 @@
 using namespace lib_name;
 
 class TestSample : public ::testing::Test {
- public:
-  TestSample() {}
+  public:
+    TestSample () {}
 
-  Sample s{};
+    Sample s {};
 };
 
-TEST_F(TestSample, default_get) { EXPECT_EQ(s.GetX(), 0); }
+TEST_F (TestSample, default_get) { EXPECT_EQ (s.GetX (), 0); }
