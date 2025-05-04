@@ -3,7 +3,7 @@
   description = "A c++ executable template";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
+    nixpkgs.url = "nixpkgs/nixos-unstable";
 
     # Add more flakes here
   };
