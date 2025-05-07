@@ -22,7 +22,7 @@ stdenv.mkDerivation rec {
     description = "My Executable";
     owner = "xdeathofmojox";
   };
-  buildInputs = [
+  nativeBuildInputs = [
     cmake
   ];
   outputs = [

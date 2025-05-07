@@ -23,7 +23,7 @@ stdenv.mkDerivation rec {
     description = "My library";
     owner = "xdeathofmojox";
   };
-  buildInputs = [
+  nativeBuildInputs = [
     cmake
   ];
   outputs = [

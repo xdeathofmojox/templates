@@ -5,7 +5,7 @@
 }:
 
 pkgs.mkShell {
-  buildInputs = with pkgs; [
+  nativeBuildInputs = [
     cmake
     clang-tools
   ];

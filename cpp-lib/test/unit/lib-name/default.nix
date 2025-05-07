@@ -25,26 +25,33 @@ stdenv.mkDerivation rec {
     description = "My library unit tests";
     owner = "xdeathofmojox";
   };
-  buildInputs = [
+  nativeBuildInputs = [
     cmake
+  ];
+  buildInputs = [
     gtest
     # TODO: Rename lib-name
     lib-name
   ];
 
-  cmakeFlags = [
-    "-DPROJECT_NAME=${pname}"
-    # TODO: Rename lib-name
-    "-DPROJECT_VERSION=${lib-name-version.major}.${lib-name-version.minor}.${lib-name-version.patch}"
-    "-DTARGET_NAME=${pname}"
-    "-DCMAKE_BUILD_TYPE=${if debug then "Debug" else "Release"}"
-  ] ++ lib.optional asan "-DENABLE_ASAN=ON"
+  cmakeFlags =
+    [
+      "-DPROJECT_NAME=${pname}"
+      # TODO: Rename lib-name
+      "-DPROJECT_VERSION=${lib-name-version.major}.${lib-name-version.minor}.${lib-name-version.patch}"
+      "-DTARGET_NAME=${pname}"
+      "-DCMAKE_BUILD_TYPE=${if debug then "Debug" else "Release"}"
+    ]
+    ++ lib.optional asan "-DENABLE_ASAN=ON"
     ++ lib.optional msan "-DENABLE_MSAN=ON"
     ++ lib.optional tsan "-DENABLE_TSAN=ON"
     ++ lib.optional ubsan "-DENABLE_UBSAN=ON";
 
   # Needed for proper sanitizer behavior
-  hardeningDisable = lib.optionals (debug && (asan || msan || tsan || ubsan)) [ "fortify" "pic" ];
+  hardeningDisable = lib.optionals (debug && (asan || msan || tsan || ubsan)) [
+    "fortify"
+    "pic"
+  ];
 
   outputs = [ "out" ];
 }

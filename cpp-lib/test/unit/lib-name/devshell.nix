@@ -8,9 +8,11 @@
 }:
 
 pkgs.mkShell {
-  buildInputs = with pkgs; [
+  nativeBuildInputs = [
     cmake
     clang-tools
+  ];
+  buildInputs = [
     gtest
     # TODO: Rename lib-name
     lib-name
