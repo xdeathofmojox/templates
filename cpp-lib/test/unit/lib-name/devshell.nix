@@ -3,63 +3,25 @@
   cmake,
   clang-tools,
   gtest,
-  # TODO: Rename lib-name
+  # TODO: rename lib-name
   lib-name,
 }:
 
+# Import base devShell and extend it
+let
+  inputs = import ../../../nix/devshell/inputs.nix { inherit pkgs cmake clang-tools; };
+  base = import ../../../nix/devshell/base.nix { inherit pkgs cmake clang-tools; };
+in
 pkgs.mkShell {
-  nativeBuildInputs = [
-    cmake
-    clang-tools
-  ];
-  buildInputs = [
+  # TODO: rename lib-name
+  nativeBuildInputs = inputs.nativeBuildInputs ++ [
     gtest
-    # TODO: Rename lib-name
     lib-name
   ];
-  packages = with pkgs; [
-    clang-tidy-check
-    clang-tidy-fix
-    clang-format-check
-    clang-format-fix
-    cpp-check
-    fish
-  ];
+  packages = inputs.packages;
 
   shellHook = ''
-    echo "🧪🐟 Entering Nix dev shell with custom Fish prompt"
-
-    # Create an isolated temporary fish config
-    export NIX_FISH_CONFIG_DIR=$(mktemp -d)
-    mkdir -p "$NIX_FISH_CONFIG_DIR/fish/functions"
-
-    # Add custom prompt
-    cat > "$NIX_FISH_CONFIG_DIR/fish/functions/fish_prompt.fish" <<'EOF'
-    function fish_prompt
-      # Show that we're in a nix shell
-      echo -n "🧪 (nix) "
-
-      # Show exit status of the last command
-      if test $status -eq 0
-        set_color green
-        echo -n "✅ "
-      else
-        set_color red
-        echo -n "❌ [$status] "
-      end
-      
-      set_color green
-      echo -n (prompt_pwd)
-      set_color normal
-      echo -n "> "
-    end
-    EOF
-
-    # Tell Fish to use our custom config
-    export XDG_CONFIG_HOME="$NIX_FISH_CONFIG_DIR"
-
-    # Launch fish interactively
-    export SHELL=${pkgs.fish}/bin/fish
-    exec $SHELL
+    echo "🧪 Unit testing environment with gtest and lib-name added!"
+    ${base.shellHook}
   '';
 }
