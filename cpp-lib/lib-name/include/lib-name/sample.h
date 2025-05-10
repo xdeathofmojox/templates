@@ -9,10 +9,10 @@ class Sample {
     Sample (Sample &&other) noexcept                     = default;  // Move Constructor
     auto operator= (Sample &&other) noexcept -> Sample & = default;  // Move Assignment Operator
     virtual ~Sample ()                                   = default;
-    virtual void               SetX (const int);
-    [[nodiscard]] virtual auto GetX () const -> int;
+    virtual void               setX (int /*new_value*/);
+    [[nodiscard]] virtual auto getX () const -> int;
 
   private:
-    int x {0};
+    int x_ {0};
 };
 }  // namespace lib_name

@@ -11,7 +11,6 @@ pkgs.writeShellScriptBin "clang-format" ''
     -o -name '*.hpp' \
     -o -name '*.cc' \
     -o -name '*.h' \) \
-  | xargs ${pkgs.clang-tools}/bin/clang-format /
-    --verbose /
-    ${if in_place then "-i" else "--dry-run --Werror"}
+  | xargs ${pkgs.clang-tools}/bin/clang-format \
+    ${if in_place then "-i" else "--Werror --dry-run"}
 ''

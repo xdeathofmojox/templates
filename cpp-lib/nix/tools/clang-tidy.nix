@@ -15,13 +15,8 @@ pkgs.writeShellScriptBin "clang-tidy" ''
       -name "*.cc" \
       -o -name "*.cpp" | \
   xargs ${pkgs.clang-tools}/bin/clang-tidy \
-      -header-filter=include \
-      --use-color \
-      -p build \
-      ${if in_place then 
-        "--fix" 
-      else 
-        "--export-fixes=clang-tidy-fixes.yaml --warnings-as-errors='*'"}
-  
+      -p $CMAKE_DIR \
+      ${if in_place then "--fix" else "--export-fixes=clang-tidy-fixes.yaml --warnings-as-errors='*'"}
+
   rm -rf $CMAKE_DIR
 ''
