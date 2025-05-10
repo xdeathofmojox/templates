@@ -20,6 +20,8 @@ pkgs.mkShell {
   packages = with pkgs; [
     clang-tidy-check
     clang-tidy-fix
+    clang-format-check
+    clang-format-fix
   ];
   shellHook = "";
 }

@@ -17,25 +17,4 @@ rec {
     # TODO: Rename lib-name
     program = "${self.packages.${system}.lib-name-unit-tests}/bin/lib-name-unit-tests";
   };
-  clang-format-check = {
-    type = "app";
-    meta = {
-      description = "Clang format check";
-      owner = "xdeathofmojox";
-    };
-    program = "${import ./nix/tools/clang-format.nix { inherit pkgs; }}/bin/clang-format";
-  };
-  clang-format-fix = {
-    type = "app";
-    meta = {
-      description = "Clang format fix";
-      owner = "xdeathofmojox";
-    };
-    program = "${
-      import ./nix/tools/clang-format.nix {
-        inherit pkgs;
-        in_place = true;
-      }
-    }/bin/clang-format";
-  };
 }
