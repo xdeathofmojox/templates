@@ -9,5 +9,9 @@ pkgs.mkShell {
     cmake
     clang-tools
   ];
+  packages = with pkgs; [
+    clang-tidy-check
+    clang-tidy-fix
+  ];
   shellHook = "";
 }

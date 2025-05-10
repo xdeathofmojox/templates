@@ -38,4 +38,4 @@ result
 result-dev
 
 # Clang specific
-*/clang-tidy-fixes.yaml
+clang-tidy-fixes.yaml

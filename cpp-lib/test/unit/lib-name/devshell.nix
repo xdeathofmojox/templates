@@ -17,5 +17,9 @@ pkgs.mkShell {
     # TODO: Rename lib-name
     lib-name
   ];
+  packages = with pkgs; [
+    clang-tidy-check
+    clang-tidy-fix
+  ];
   shellHook = "";
 }

@@ -1,6 +1,7 @@
 #pragma once
 
 namespace lib_name {
+
 class Sample {
   public:
     Sample ()                                            = default;

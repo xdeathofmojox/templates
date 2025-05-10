@@ -3,20 +3,22 @@
   in_place ? false,
 }:
 
-pkgs.writeShellScriptBin "clang-tidy" ''
-  set -e
-  WORK_DIR=`pwd`
-  CMAKE_DIR=`mktemp -d`
-  pushd $CMAKE_DIR
-  ${pkgs.cmake}/bin/cmake $WORK_DIR -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
-  popd
+pkgs.writeShellApplication {
+  name = if in_place then "clang-tidy-fix" else "clang-tidy-check";
+  runtimeInputs = [ pkgs.clang-tools pkgs.cmake ];
+  text = ''
+    set -e
 
-  find . \
-      -name "*.cc" \
-      -o -name "*.cpp" | \
-  xargs ${pkgs.clang-tools}/bin/clang-tidy \
-      -p $CMAKE_DIR \
-      ${if in_place then "--fix" else "--export-fixes=clang-tidy-fixes.yaml --warnings-as-errors='*'"}
+    WORK_DIR=$(pwd)
+    CMAKE_DIR=$(mktemp -d)
 
-  rm -rf $CMAKE_DIR
-''
+    cmake "$WORK_DIR" -B "$CMAKE_DIR" -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
+
+    find "$WORK_DIR" \( -name "*.cc" -o -name "*.cpp" \) -print0 | \
+    xargs -0 clang-tidy \
+        -p "$CMAKE_DIR" \
+        ${if in_place then "--fix" else "--export-fixes=clang-tidy-fixes.yaml --warnings-as-errors='*'"}
+
+    rm -rf "$CMAKE_DIR"
+  '';
+}
