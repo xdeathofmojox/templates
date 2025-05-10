@@ -10,4 +10,4 @@ class TestSample : public ::testing::Test {
 };
 
 TEST_F (TestSample, defaultGet) { EXPECT_EQ (s.getX (), 0); }
-} // namespace lib_name
+}  // namespace lib_name

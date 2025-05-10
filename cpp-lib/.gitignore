@@ -39,3 +39,6 @@ result-dev
 
 # Clang specific
 clang-tidy-fixes.yaml
+
+# Cpp-check specific
+cpp-check-results

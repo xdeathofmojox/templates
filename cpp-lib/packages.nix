@@ -10,8 +10,4 @@ rec {
   lib-name-debug = lib-name.override { debug = true; };
   # TODO: Rename lib-name
   lib-name-unit-tests = pkgs.callPackage ./test/unit/lib-name { };
-  # TODO: Rename lib-name
-  lib-name-cpp-check = pkgs.callPackage ./nix/static-analysis/cpp-check.nix {
-    src = pkgs.lib-name.src;
-  };
 }

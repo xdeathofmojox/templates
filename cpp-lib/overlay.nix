@@ -12,4 +12,5 @@ final: prev: rec {
   clang-tidy-fix = final.callPackage ./nix/tools/clang-tidy.nix { in_place = true; };
   clang-format-check = final.callPackage ./nix/tools/clang-format.nix { };
   clang-format-fix = final.callPackage ./nix/tools/clang-format.nix { in_place = true; };
+  cpp-check = final.callPackage ./nix/tools/cpp-check.nix { };
 }
