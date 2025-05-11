@@ -9,5 +9,5 @@ rec {
   # TODO: Rename lib-name
   lib-name-debug = lib-name.override { debug = true; };
   # TODO: Rename lib-name
-  lib-name-unit-tests = pkgs.callPackage ./test/unit/lib-name { };
+  lib-name-unit-tests = pkgs.callPackage ./../test/unit/lib-name { };
 }
