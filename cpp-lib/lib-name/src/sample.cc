@@ -1,7 +1,7 @@
 #include "lib-name/sample.h"
 
 namespace lib_name {
-void Sample::SetX (const int new_value) { x = new_value; }
+void Sample::setX (const int new_value) { x_ = new_value; }
 
-auto Sample::GetX () const -> int { return x; }
+auto Sample::getX () const -> int { return x_; }
 }  // namespace lib_name

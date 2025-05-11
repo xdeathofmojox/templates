@@ -1,13 +1,13 @@
 #include <gtest/gtest.h>
 #include <lib-name/sample.h>
 
-using namespace lib_name;
-
+namespace lib_name {
 class TestSample : public ::testing::Test {
   public:
-    TestSample () {}
+    TestSample () = default;
 
-    Sample s {};
+    Sample s;
 };
 
-TEST_F (TestSample, default_get) { EXPECT_EQ (s.GetX (), 0); }
+TEST_F (TestSample, defaultGet) { EXPECT_EQ (s.getX (), 0); }
+}  // namespace lib_name

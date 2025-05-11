@@ -2,12 +2,24 @@
   pkgs ? import <nixpkgs> { },
   cmake,
   clang-tools,
+  clang-tidy-check,
+  clang-tidy-fix,
+  clang-format-check,
+  clang-format-fix,
+  cpp-check,
+  ...
 }:
 
-pkgs.mkShell {
-  nativeBuildInputs = [
+# Import base devShell
+import ../nix/devshell/base.nix {
+  inherit
+    pkgs
     cmake
     clang-tools
-  ];
-  shellHook = "";
+    clang-tidy-check
+    clang-tidy-fix
+    clang-format-check
+    clang-format-fix
+    cpp-check
+    ;
 }
