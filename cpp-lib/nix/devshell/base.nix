@@ -11,16 +11,17 @@
 }:
 
 let
-  inputs = import ./inputs.nix { 
-    inherit 
-      pkgs 
-      cmake 
-      clang-tools 
+  inputs = import ./inputs.nix {
+    inherit
+      pkgs
+      cmake
+      clang-tools
       clang-tidy-check
       clang-tidy-fix
       clang-format-check
       clang-format-fix
-      cpp-check;
+      cpp-check
+      ;
   };
 in
 pkgs.mkShell {
