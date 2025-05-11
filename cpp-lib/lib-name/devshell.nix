@@ -2,7 +2,24 @@
   pkgs ? import <nixpkgs> { },
   cmake,
   clang-tools,
+  clang-tidy-check,
+  clang-tidy-fix,
+  clang-format-check,
+  clang-format-fix,
+  cpp-check,
+  ...
 }:
 
 # Import base devShell
-import ../nix/base-devshell.nix { inherit pkgs cmake clang-tools; }
+import ../nix/devshell/base.nix {
+  inherit
+    pkgs
+    cmake
+    clang-tools
+    clang-tidy-check
+    clang-tidy-fix
+    clang-format-check
+    clang-format-fix
+    cpp-check
+    ;
+}
