@@ -1,7 +1,6 @@
 {
-  pkgs ? import <nixpkgs> { },
+  pkgs,
   ...
 }@args:
 
-# Import base devShell
 import ../nix/devshell/base.nix args
