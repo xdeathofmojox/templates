@@ -1,4 +1,7 @@
-{ pkgs ? import <nixpkgs> { }, ... } @ args:
+{
+  pkgs ? import <nixpkgs> { },
+  ...
+}@args:
 
 # Import base devShell and extend it
 let
