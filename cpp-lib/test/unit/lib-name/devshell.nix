@@ -1,52 +1,15 @@
-{
-  pkgs ? import <nixpkgs> { },
-  cmake,
-  clang-tools,
-  clang-tidy-check,
-  clang-tidy-fix,
-  clang-format-check,
-  clang-format-fix,
-  cpp-check,
-  include-what-you-use,
-  gtest,
-  # TODO: rename lib-name
-  lib-name,
-}:
+{ pkgs ? import <nixpkgs> { }, ... } @ args:
 
 # Import base devShell and extend it
 let
-  inputs = import ../../../nix/devshell/inputs.nix {
-    inherit
-      pkgs
-      cmake
-      clang-tools
-      clang-tidy-check
-      clang-tidy-fix
-      clang-format-check
-      clang-format-fix
-      cpp-check
-      include-what-you-use
-      ;
-  };
-  base = import ../../../nix/devshell/base.nix {
-    inherit
-      pkgs
-      cmake
-      clang-tools
-      clang-tidy-check
-      clang-tidy-fix
-      clang-format-check
-      clang-format-fix
-      cpp-check
-      include-what-you-use
-      ;
-  };
+  inputs = import ../../../nix/devshell/inputs.nix args;
+  base = import ../../../nix/devshell/base.nix args;
 in
 pkgs.mkShell {
   # TODO: rename lib-name
   nativeBuildInputs = inputs.nativeBuildInputs ++ [
-    gtest
-    lib-name
+    pkgs.gtest
+    pkgs.lib-name
   ];
   packages = inputs.packages;
 

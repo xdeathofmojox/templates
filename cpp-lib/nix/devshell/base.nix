@@ -1,30 +1,7 @@
-{
-  pkgs ? import <nixpkgs> { },
-  cmake,
-  clang-tools,
-  clang-tidy-check,
-  clang-tidy-fix,
-  clang-format-check,
-  clang-format-fix,
-  cpp-check,
-  include-what-you-use,
-  ...
-}:
+{ pkgs ? import <nixpkgs> { }, ... } @ args:
 
 let
-  inputs = import ./inputs.nix {
-    inherit
-      pkgs
-      cmake
-      clang-tools
-      clang-tidy-check
-      clang-tidy-fix
-      clang-format-check
-      clang-format-fix
-      cpp-check
-      include-what-you-use
-      ;
-  };
+  inputs = import ./inputs.nix args;
 in
 pkgs.mkShell {
   inherit (inputs) packages nativeBuildInputs;

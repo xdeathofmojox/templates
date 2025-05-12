@@ -1,29 +1,18 @@
-{
-  pkgs,
-  cmake,
-  clang-tools,
-  clang-tidy-check,
-  clang-tidy-fix,
-  clang-format-check,
-  clang-format-fix,
-  cpp-check,
-  include-what-you-use,
-  ...
-}:
+{ pkgs ? import <nixpkgs> { }, ... } @ args:
 
 {
-  packages = with pkgs; [
-    clang-tidy-check
-    clang-tidy-fix
-    clang-format-check
-    clang-format-fix
-    cpp-check
-    include-what-you-use
-    fish
+  packages = [
+    args.clang-tidy-check
+    args.clang-tidy-fix
+    args.clang-format-check
+    args.clang-format-fix
+    args.cpp-check
+    args.include-what-you-use
+    pkgs.fish
   ];
 
   nativeBuildInputs = [
-    cmake
-    clang-tools
+    pkgs.cmake
+    pkgs.clang-tools
   ];
 }
