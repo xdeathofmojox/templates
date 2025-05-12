@@ -5,6 +5,7 @@ let
   clang-format-check = pkgs.callPackage ./tools/clang-format.nix { };
   clang-format-fix = pkgs.callPackage ./tools/clang-format.nix { in_place = true; };
   cpp-check = pkgs.callPackage ./tools/cpp-check.nix { };
+  include-what-you-use = pkgs.callPackage ./tools/include-what-you-use.nix { };
 in
 rec {
   # TODO: Rename lib-name
@@ -17,6 +18,7 @@ rec {
       clang-format-check
       clang-format-fix
       cpp-check
+      include-what-you-use
       ;
   };
   # TODO: Rename lib-name
@@ -27,6 +29,7 @@ rec {
       clang-format-check
       clang-format-fix
       cpp-check
+      include-what-you-use
       ;
   };
 }

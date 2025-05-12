@@ -7,6 +7,7 @@
   clang-format-check,
   clang-format-fix,
   cpp-check,
+  include-what-you-use,
   ...
 }:
 
@@ -21,5 +22,6 @@ import ../nix/devshell/base.nix {
     clang-format-check
     clang-format-fix
     cpp-check
+    include-what-you-use
     ;
 }

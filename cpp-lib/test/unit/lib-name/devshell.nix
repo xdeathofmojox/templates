@@ -7,6 +7,7 @@
   clang-format-check,
   clang-format-fix,
   cpp-check,
+  include-what-you-use,
   gtest,
   # TODO: rename lib-name
   lib-name,
@@ -24,6 +25,7 @@ let
       clang-format-check
       clang-format-fix
       cpp-check
+      include-what-you-use
       ;
   };
   base = import ../../../nix/devshell/base.nix {
@@ -36,6 +38,7 @@ let
       clang-format-check
       clang-format-fix
       cpp-check
+      include-what-you-use
       ;
   };
 in

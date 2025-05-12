@@ -7,6 +7,7 @@
   clang-format-check,
   clang-format-fix,
   cpp-check,
+  include-what-you-use,
   ...
 }:
 
@@ -17,6 +18,7 @@
     clang-format-check
     clang-format-fix
     cpp-check
+    include-what-you-use
     fish
   ];
 

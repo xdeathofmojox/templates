@@ -7,6 +7,7 @@
   clang-format-check,
   clang-format-fix,
   cpp-check,
+  include-what-you-use,
   ...
 }:
 
@@ -21,6 +22,7 @@ let
       clang-format-check
       clang-format-fix
       cpp-check
+      include-what-you-use
       ;
   };
 in
