@@ -17,7 +17,5 @@ pkgs.mkShell {
   packages = inputs.packages;
 
   shellHook = ''
-    echo "🧪 Unit testing environment with gtest and lib-name added!"
-    ${base.shellHook}
   '';
 }

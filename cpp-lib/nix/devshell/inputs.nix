@@ -12,6 +12,7 @@
     args.cpp-check
     args.include-what-you-use
     pkgs.fish
+    pkgs.direnv
   ];
 
   nativeBuildInputs = [

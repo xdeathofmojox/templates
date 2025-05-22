@@ -1,5 +1,7 @@
-#include <gtest/gtest.h>
-#include <lib-name/sample.h>
+#include <gtest/gtest.h>      // for Message, TestInfo (ptr only), CmpHelperEQ
+#include <lib-name/sample.h>  // for Sample
+
+#include <string>             // NOLINT
 
 namespace lib_name {
 class TestSample : public ::testing::Test {

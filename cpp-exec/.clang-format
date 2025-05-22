@@ -97,7 +97,7 @@ Language: Cpp
 LineEnding: LF
 MaxEmptyLinesToKeep: 1
 NamespaceIndentation: None
-PPIndentWidth: 2
+PPIndentWidth: 0
 PackConstructorInitializers: Never
 PointerAlignment: Left
 QualifierAlignment: Leave
