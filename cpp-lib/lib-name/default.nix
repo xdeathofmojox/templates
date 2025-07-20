@@ -12,9 +12,12 @@
   lib-name-version,
 }:
 
-stdenv.mkDerivation rec {
+let
   # TODO: Rename lib-name
-  pname = "lib-name";
+  project-name = "lib-name";
+in
+stdenv.mkDerivation rec {
+  pname = project-name;
   # TODO: Rename lib-name
   version = "v${lib-name-version.major}.${lib-name-version.minor}.${lib-name-version.patch}";
   src = ./.;
@@ -32,10 +35,10 @@ stdenv.mkDerivation rec {
 
   cmakeFlags =
     [
-      "-DPROJECT_NAME=${pname}"
+      "-DPROJECT_NAME=${project-name}"
       # TODO: Rename lib-name
       "-DPROJECT_VERSION=${lib-name-version.major}.${lib-name-version.minor}.${lib-name-version.patch}"
-      "-DTARGET_NAME=${pname}"
+      "-DTARGET_NAME=${project-name}"
       "-DBUILD_STATIC=${if static then "ON" else "OFF"}"
       "-DCMAKE_BUILD_TYPE=${if debug then "Debug" else "Release"}"
     ]

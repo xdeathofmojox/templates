@@ -1,4 +1,9 @@
-{ self, nixpkgs }:
+{
+  self,
+  nixpkgs,
+  treefmt-nix,
+  ...
+}:
 
 let
   supportedSystems = [
@@ -18,9 +23,15 @@ let
           overlays = [ self.overlays.default ];
           config = { };
         };
+        treefmtEval = treefmt-nix.lib.evalModule pkgs ./fmt/treefmt.nix;
       in
       f {
-        inherit self system pkgs;
+        inherit
+          self
+          system
+          pkgs
+          treefmtEval
+          ;
       }
     );
 in

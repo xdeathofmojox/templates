@@ -1,4 +1,4 @@
-final: prev: rec {
+final: prev: {
   # TODO: Rename lib-name
   lib-name-version = {
     major = "0";
@@ -7,4 +7,6 @@ final: prev: rec {
   };
   # TODO: Rename lib-name
   lib-name = final.callPackage ./lib-name { };
+  # TODO: Rename lib-name
+  lib-name-unit-tests = final.callPackage ./test/unit/lib-name { };
 }

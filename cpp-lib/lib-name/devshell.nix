@@ -1,6 +1,12 @@
 {
-  pkgs,
-  ...
-}@args:
+  mkShell,
+  cmake,
+}:
 
-import ../nix/devshell/base.nix args
+mkShell {
+  nativeBuildInputs = [
+    cmake
+  ];
+
+  shellHook = '''';
+}
