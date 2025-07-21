@@ -25,6 +25,8 @@
 
       apps = lib.forEachSupportedSystem (args: import ./nix/apps.nix args.pkgs);
 
+      checks = lib.forEachSupportedSystem (args: import ./nix/checks.nix args.pkgs);
+
       devShells = lib.forEachSupportedSystem (args: import ./nix/devshells.nix args.pkgs);
 
       formatter = lib.forEachSupportedSystem (args: args.treefmtEval.config.build.wrapper);
