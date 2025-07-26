@@ -6,6 +6,7 @@ Checks:	'-*,
   cppcoreguidelines-*,
   google-*,
   misc-*,
+  -misc-include-cleaner,
   modernize-*,
   performance-*,
   readability-*'
