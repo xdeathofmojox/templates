@@ -25,7 +25,7 @@
 
       apps = lib.forEachSupportedSystem (args: import ./nix/apps.nix args.pkgs);
 
-      checks = lib.forEachSupportedSystem (args: import ./nix/checks.nix args.pkgs);
+      checks = lib.forEachSupportedSystem (args: import ./nix/checks.nix (args.pkgs // args));
 
       devShells = lib.forEachSupportedSystem (args: import ./nix/devshells.nix args.pkgs);
 

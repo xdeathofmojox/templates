@@ -1,4 +1,5 @@
 {
+  self,
   cmake,
   clang-tools,
   cppcheck,
@@ -9,6 +10,7 @@
   clang-tidy-check,
   cpp-check,
   runCommand,
+  treefmtEval,
   ...
 }:
 
@@ -53,4 +55,6 @@
         ${cpp-check}/bin/cpp-check
         mkdir -p $out
       '';
+
+  fmt-check = treefmtEval.config.build.check self;
 }
