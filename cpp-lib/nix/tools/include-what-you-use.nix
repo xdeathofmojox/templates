@@ -1,11 +1,12 @@
 {
-  pkgs,
+  include-what-you-use,
+  writeShellApplication,
 }:
 
-pkgs.writeShellApplication {
+writeShellApplication {
   name = "iwyu";
   runtimeInputs = [
-    pkgs.include-what-you-use
+    include-what-you-use
   ];
   text = ''
     set -e

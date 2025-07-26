@@ -1,13 +1,15 @@
 {
-  pkgs,
+  clang-tools,
+  cmake,
+  writeShellApplication,
   in_place ? false,
 }:
 
-pkgs.writeShellApplication {
+writeShellApplication {
   name = if in_place then "clang-tidy-fix" else "clang-tidy-check";
   runtimeInputs = [
-    pkgs.clang-tools
-    pkgs.cmake
+    clang-tools
+    cmake
   ];
   text = ''
     set -e
