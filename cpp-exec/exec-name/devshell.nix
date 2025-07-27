@@ -1,6 +1,23 @@
 {
-  pkgs,
-  ...
-}@args:
+  mkShell,
+  cmake,
+  clang-tidy-check,
+  clang-tidy-fix,
+  cpp-check,
+  iwyu,
+}:
 
-import ../nix/devshell/base.nix args
+mkShell {
+  nativeBuildInputs = [
+    cmake
+  ];
+
+  packages = [
+    clang-tidy-check
+    clang-tidy-fix
+    cpp-check
+    iwyu
+  ];
+
+  shellHook = '''';
+}

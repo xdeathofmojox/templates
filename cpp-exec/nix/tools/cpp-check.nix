@@ -1,11 +1,14 @@
 {
-  pkgs,
+  cppcheck,
+  libxml2,
+  writeShellApplication,
 }:
 
-pkgs.writeShellApplication {
+writeShellApplication {
   name = "cpp-check";
   runtimeInputs = [
-    pkgs.cppcheck
+    cppcheck
+    libxml2
   ];
   text = ''
     set -e
@@ -19,6 +22,7 @@ pkgs.writeShellApplication {
       --enable=all \
       --suppress=missingIncludeSystem \
       --suppress=unmatchedSuppression \
+      --inline-suppr \
       --xml \
       --output-file="$RESULT_DIR/cppcheck_report.xml" \
       --inconclusive \

@@ -1,4 +1,4 @@
-final: prev: rec {
+final: prev: {
   # TODO: Rename exec-name
   exec-name-version = {
     major = "0";
