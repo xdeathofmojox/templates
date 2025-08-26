@@ -73,7 +73,8 @@ add_library(${TARGET_NAME} ${LIB_TYPE} ${SRC_LIST})
 #########################################
 target_include_directories(${TARGET_NAME} PUBLIC 
     $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/include>
-    $<INSTALL_INTERFACE:include>)
+    $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>)
+
 
 #########################################
 # target link libraries
@@ -140,25 +141,36 @@ install(DIRECTORY "${CMAKE_CURRENT_LIST_DIR}/include/"
         PATTERN "*.tpp")
 
 #########################################
-# install library
+# install library + export targets
 #########################################
 install(TARGETS ${TARGET_NAME}
     EXPORT ${TARGET_NAME}Targets
-        LIBRARY DESTINATION lib
-        ARCHIVE DESTINATION lib)
+    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+    INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
 
-#########################################
-# install cmake configs
-#########################################
 install(EXPORT ${TARGET_NAME}Targets
     FILE ${TARGET_NAME}Targets.cmake
     NAMESPACE ${TARGET_NAME}::
-    DESTINATION lib/cmake/${TARGET_NAME})
+    DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/${TARGET_NAME})
 
+#########################################
+# install package config files
+#########################################
 include(CMakePackageConfigHelpers)
-write_basic_package_version_file("${CMAKE_BINARY_DIR}/${TARGET_NAME}ConfigVersion.cmake"
+
+write_basic_package_version_file(
+    "${CMAKE_CURRENT_BINARY_DIR}/${TARGET_NAME}ConfigVersion.cmake"
     VERSION ${PROJECT_VERSION}
     COMPATIBILITY SameMajorVersion)
 
-install(FILES "${TARGET_NAME}Config.cmake" "${CMAKE_BINARY_DIR}/${TARGET_NAME}ConfigVersion.cmake" "${CMAKE_BINARY_DIR}/compile_commands.json"
-    DESTINATION lib/cmake/${TARGET_NAME})
+configure_package_config_file(
+    "${CMAKE_CURRENT_LIST_DIR}/cmake/${TARGET_NAME}Config.cmake.in"
+    "${CMAKE_CURRENT_BINARY_DIR}/${TARGET_NAME}Config.cmake"
+    INSTALL_DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/${TARGET_NAME})
+
+install(FILES
+    "${CMAKE_CURRENT_BINARY_DIR}/${TARGET_NAME}Config.cmake"
+    "${CMAKE_CURRENT_BINARY_DIR}/${TARGET_NAME}ConfigVersion.cmake"
+    DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/${TARGET_NAME})

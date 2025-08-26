@@ -1,0 +1,6 @@
+@PACKAGE_INIT@
+
+include(CMakeFindDependencyMacro)
+
+include("${CMAKE_CURRENT_LIST_DIR}/@TARGET_NAME@Targets.cmake")
+set(@TARGET_NAME@_NAMESPACE "@TARGET_NAME@::")
