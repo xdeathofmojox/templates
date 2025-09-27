@@ -152,7 +152,7 @@ write_basic_package_version_file(
     COMPATIBILITY SameMajorVersion)
 
 configure_package_config_file(
-    "${CMAKE_CURRENT_LIST_DIR}/cmake/${TARGET_NAME}Config.cmake.in"
+    "${CMAKE_CURRENT_LIST_DIR}/cmake/Config.cmake.in"
     "${CMAKE_CURRENT_BINARY_DIR}/${TARGET_NAME}Config.cmake"
     INSTALL_DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/${TARGET_NAME})
 
