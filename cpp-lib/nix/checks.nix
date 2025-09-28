@@ -22,22 +22,26 @@
     mkdir -p $out
   '';
 
-  lib-name-clang-tidy =
-    runCommand "clang-tidy"
-      {
-        nativeBuildInputs = [
-          cmake
-          clang-tools
-          stdenv.cc
-        ];
-      }
-      ''
-        set -e
-
-        cd ${lib-name.src}
-        ${clang-tidy-check}/bin/clang-tidy-check
-        mkdir -p $out
-      '';
+  lib-name-clang-tidy = stdenv.mkDerivation {
+    name = "lib-name-clang-tidy";
+    src = lib-name.src;
+    nativeBuildInputs = [
+      clang-tidy-check
+    ];
+    buildInputs = [
+      lib-name
+    ];
+    buildPhase = ''
+      runHook preBuild
+      ${clang-tidy-check}/bin/clang-tidy-check
+      runHook postBuild
+    '';
+    installPhase = ''
+      runHook preInstall
+      mkdir -p $out
+      runHook postInstall
+    '';
+  };
 
   lib-name-cpp-check =
     runCommand "cpp-check"

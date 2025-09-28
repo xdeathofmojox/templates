@@ -14,22 +14,26 @@
 }:
 
 {
-  exec-name-clang-tidy =
-    runCommand "clang-tidy"
-      {
-        nativeBuildInputs = [
-          cmake
-          clang-tools
-          stdenv.cc
-        ];
-      }
-      ''
-        set -e
-
-        cd ${exec-name.src}
-        ${clang-tidy-check}/bin/clang-tidy-check
-        mkdir -p $out
-      '';
+  exec-name-clang-tidy = stdenv.mkDerivation {
+    name = "exec-name-clang-tidy";
+    src = exec-name.src;
+    nativeBuildInputs = [
+      clang-tidy-check
+    ];
+    buildInputs = [
+      exec-name
+    ];
+    buildPhase = ''
+      runHook preBuild
+      ${clang-tidy-check}/bin/clang-tidy-check
+      runHook postBuild
+    '';
+    installPhase = ''
+      runHook preInstall
+      mkdir -p $out
+      runHook postInstall
+    '';
+  };
 
   exec-name-cpp-check =
     runCommand "cpp-check"
