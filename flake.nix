@@ -27,6 +27,11 @@
         path = ./rust-cargo-workspace;
         description = "A rust cargo workspace";
       };
+
+      zig-lib = {
+        path = ./zig-lib;
+        description = "A zig library template";
+      };
     };
 
     templates.default = self.templates.cpp-lib;
