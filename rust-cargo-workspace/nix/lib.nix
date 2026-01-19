@@ -1,4 +1,9 @@
-{ self, nixpkgs }:
+{
+  self,
+  nixpkgs,
+  fenix,
+  treefmt-nix,
+}:
 
 let
   supportedSystems = [
@@ -15,12 +20,21 @@ let
       let
         pkgs = import nixpkgs {
           inherit system;
-          overlays = [ self.overlays.default ];
+          overlays = [
+            fenix.overlays.default
+            self.overlays.default
+          ];
           config = { };
         };
+        treefmtEval = treefmt-nix.lib.evalModule pkgs ./treefmt.nix;
       in
       f {
-        inherit self system pkgs;
+        inherit
+          self
+          system
+          pkgs
+          treefmtEval
+          ;
       }
     );
 in

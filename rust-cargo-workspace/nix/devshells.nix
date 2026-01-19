@@ -1,14 +1,24 @@
-{ pkgs, ... }:
 {
-  default = pkgs.mkShell {
-    buildInputs = with pkgs; [
-      cargo
+  mkShell,
+  cargo-nextest,
+  fenix,
+  ...
+}:
+let
+  toolchain = fenix.stable.withComponents [
+    "cargo"
+    "clippy"
+    "rustc"
+    "rustfmt"
+    "rust-src"
+  ];
+in
+{
+  default = mkShell {
+    buildInputs = [
+      toolchain
+      fenix.rust-analyzer
       cargo-nextest
-
-      rustc
-      rustfmt
-      rust-analyzer
     ];
-    shellHook = "";
   };
 }

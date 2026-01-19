@@ -1,7 +1,7 @@
 final: prev: rec {
   workspace-name = final.rustPlatform.buildRustPackage {
-    pname = (final.lib.importTOML ./Cargo.toml).workspace.name;
-    version = (final.lib.importTOML ./Cargo.toml).workspace.version;
+    pname = (final.lib.importTOML ./Cargo.toml).workspace.metadata.name;
+    version = (final.lib.importTOML ./Cargo.toml).workspace.metadata.version;
     src = ./.;
     cargoLock.lockFile = ./Cargo.lock;
   };

@@ -1,8 +1,10 @@
 [workspace]
-name = "workspace_name"
-version = "0.1.0"
 members = [
   "crates/exec_name",
   "crates/lib_name",
 ]
 resolver = "2"
+
+[workspace.metadata]
+name = "workspace_name"
+version = "0.1.0"

@@ -1,7 +1,10 @@
-{ pkgs, ... }:
 {
-  default = pkgs.workspace-name;
-  workspace = pkgs.workspace-name;
-  exec-name = pkgs.exec-name;
-  lib-name = pkgs.lib-name;
+  workspace-name,
+  exec-name,
+  lib-name,
+  ...
+}:
+{
+  default = workspace-name;
+  inherit workspace-name exec-name lib-name;
 }
