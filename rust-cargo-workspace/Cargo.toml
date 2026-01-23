@@ -3,7 +3,7 @@ members = [
   "crates/exec_name",
   "crates/lib_name",
 ]
-resolver = "2"
+resolver = "3"
 
 [workspace.metadata]
 name = "workspace_name"
