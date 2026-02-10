@@ -1,5 +1,7 @@
 {
   mkShell,
+  cargo-audit,
+  cargo-machete,
   cargo-nextest,
   fenix,
   ...
@@ -18,6 +20,8 @@ in
     buildInputs = [
       toolchain
       fenix.rust-analyzer
+      cargo-audit
+      cargo-machete
       cargo-nextest
     ];
   };
