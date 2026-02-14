@@ -3,6 +3,7 @@
   cargo-audit,
   cargo-machete,
   cargo-nextest,
+  cargo-tarpaulin,
   fenix,
   ...
 }:
@@ -23,6 +24,7 @@ in
       cargo-audit
       cargo-machete
       cargo-nextest
+      cargo-tarpaulin
     ];
   };
 }
