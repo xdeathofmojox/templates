@@ -1,6 +1,7 @@
 {
   mkShell,
   cargo-audit,
+  cargo-geiger,
   cargo-machete,
   cargo-nextest,
   cargo-tarpaulin,
@@ -22,6 +23,7 @@ in
       toolchain
       fenix.rust-analyzer
       cargo-audit
+      cargo-geiger
       cargo-machete
       cargo-nextest
       cargo-tarpaulin
