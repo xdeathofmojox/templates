@@ -1,7 +1,7 @@
 [workspace]
 members = [
   "crates/exec_name",
-  "crates/lib_name",
+  "crates/lib_name"
 ]
 resolver = "3"
 

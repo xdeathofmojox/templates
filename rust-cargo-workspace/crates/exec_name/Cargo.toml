@@ -1,7 +1,7 @@
+[dependencies]
+lib_name = {version = "0.1.0", path = "../lib_name"}
+
 [package]
 name = "exec_name"
 version = "0.1.0"
 edition = "2024"
-
-[dependencies]
-lib_name = { version = "0.1.0", path = "../lib_name" }
