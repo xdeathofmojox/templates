@@ -12,9 +12,12 @@ if(NOT CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE Debug CACHE STRING "Build type" FORCE)
 endif()
 
-project(${PROJECT_NAME} 
+project(${PROJECT_NAME}
     VERSION ${PROJECT_VERSION}
     LANGUAGES CXX)
+
+include(GNUInstallDirs)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 #########################################
 # Sanitizer Options
@@ -27,12 +30,6 @@ option(ENABLE_UBSAN "Enable UndefinedBehaviorSanitizer" OFF)
 
 message(STATUS "Build type: ${CMAKE_BUILD_TYPE}")
 message(STATUS "ASAN: ${ENABLE_ASAN}, MSAN: ${ENABLE_MSAN}, TSAN: ${ENABLE_TSAN}, UBSAN: ${ENABLE_UBSAN}")
-if(CMAKE_BUILD_TYPE STREQUAL "Debug")
-    message(STATUS "Sanitizers will be applied")
-else()
-    message(STATUS "Sanitizers will not be applied in non-debug build type")
-endif()
-
 # Setup compile flags for sanitizers
 set(SANITIZER_FLAGS "")
 if(ENABLE_ASAN)
@@ -46,6 +43,14 @@ if(ENABLE_TSAN)
 endif()
 if(ENABLE_UBSAN)
     list(APPEND SANITIZER_FLAGS "-fsanitize=undefined")
+endif()
+
+if(SANITIZER_FLAGS)
+    if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+        message(STATUS "Sanitizers will be applied: ${SANITIZER_FLAGS}")
+    else()
+        message(WARNING "Sanitizers requested but will not be applied in non-Debug build type")
+    endif()
 endif()
 
 #########################################
@@ -111,12 +116,6 @@ if(CMAKE_BUILD_TYPE STREQUAL "Debug")
 endif()
 
 #########################################
-# export compile commands
-#########################################
-set_target_properties(${TARGET_NAME} 
-    PROPERTIES EXPORT_COMPILE_COMMANDS ON)
-
-#########################################
 # target c++ 20
 #########################################
 target_compile_features(${TARGET_NAME} PRIVATE cxx_std_20)
@@ -124,7 +123,7 @@ target_compile_features(${TARGET_NAME} PRIVATE cxx_std_20)
 #########################################
 # install test
 #########################################
-install(TARGETS ${TARGET_NAME} DESTINATION "${CMAKE_INSTALL_PREFIX}/bin")
+install(TARGETS ${TARGET_NAME} RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
 
 #########################################
 # install cmake configs

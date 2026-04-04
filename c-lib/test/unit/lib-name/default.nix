@@ -14,14 +14,11 @@
   lib-name-version,
 }:
 
-let
+stdenv.mkDerivation (finalAttrs: {
   # TODO: Rename lib-name
-  project-name = "lib-name-unit-tests";
-in
-stdenv.mkDerivation {
-  pname = project-name;
+  pname = "lib-name-unit-tests";
   # TODO: Rename lib-name
-  version = "v${lib-name-version.major}.${lib-name-version.minor}.${lib-name-version.patch}";
+  version = "${lib-name-version.major}.${lib-name-version.minor}.${lib-name-version.patch}";
   src = ./.;
   meta = {
     # TODO: Update description
@@ -38,10 +35,9 @@ stdenv.mkDerivation {
   ];
 
   cmakeFlags = [
-    "-DPROJECT_NAME=${project-name}"
-    # TODO: Rename lib-name
-    "-DPROJECT_VERSION=${lib-name-version.major}.${lib-name-version.minor}.${lib-name-version.patch}"
-    "-DTARGET_NAME=${project-name}"
+    "-DPROJECT_NAME=${finalAttrs.pname}"
+    "-DPROJECT_VERSION=${finalAttrs.version}"
+    "-DTARGET_NAME=${finalAttrs.pname}"
     "-DCMAKE_BUILD_TYPE=${if debug then "Debug" else "Release"}"
   ]
   ++ lib.optional asan "-DENABLE_ASAN=ON"
@@ -56,4 +52,4 @@ stdenv.mkDerivation {
   ];
 
   outputs = [ "out" ];
-}
+})

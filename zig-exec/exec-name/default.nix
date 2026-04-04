@@ -5,14 +5,11 @@
   exec-name-version,
 }:
 
-let
+stdenv.mkDerivation {
   # TODO: Rename exec-name
-  project-name = "exec-name";
-in
-stdenv.mkDerivation rec {
-  pname = project-name;
+  pname = "exec-name";
   # TODO: Rename exec-name
-  version = "v${exec-name-version.major}.${exec-name-version.minor}.${exec-name-version.patch}";
+  version = "${exec-name-version.major}.${exec-name-version.minor}.${exec-name-version.patch}";
   src = ./.;
   meta = {
     # TODO: Update description

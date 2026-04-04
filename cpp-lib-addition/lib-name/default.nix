@@ -12,14 +12,11 @@
   lib-name-version,
 }:
 
-let
+stdenv.mkDerivation (finalAttrs: {
   # TODO: Rename lib-name
-  project-name = "lib-name";
-in
-stdenv.mkDerivation rec {
-  pname = project-name;
+  pname = "lib-name";
   # TODO: Rename lib-name
-  version = "v${lib-name-version.major}.${lib-name-version.minor}.${lib-name-version.patch}";
+  version = "${lib-name-version.major}.${lib-name-version.minor}.${lib-name-version.patch}";
   src = ./.;
   meta = {
     # TODO: Update description
@@ -35,10 +32,9 @@ stdenv.mkDerivation rec {
   ];
 
   cmakeFlags = [
-    "-DPROJECT_NAME=${project-name}"
-    # TODO: Rename lib-name
-    "-DPROJECT_VERSION=${lib-name-version.major}.${lib-name-version.minor}.${lib-name-version.patch}"
-    "-DTARGET_NAME=${project-name}"
+    "-DPROJECT_NAME=${finalAttrs.pname}"
+    "-DPROJECT_VERSION=${finalAttrs.version}"
+    "-DTARGET_NAME=${finalAttrs.pname}"
     "-DBUILD_STATIC=${if static then "ON" else "OFF"}"
     "-DCMAKE_BUILD_TYPE=${if debug then "Debug" else "Release"}"
   ]
@@ -52,4 +48,4 @@ stdenv.mkDerivation rec {
     "fortify"
     "pic"
   ];
-}
+})

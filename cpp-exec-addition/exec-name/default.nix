@@ -11,11 +11,11 @@
   exec-name-version,
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   # TODO: Rename exec-name
   pname = "exec-name";
   # TODO: Rename exec-name
-  version = "v${exec-name-version.major}.${exec-name-version.minor}.${exec-name-version.patch}";
+  version = "${exec-name-version.major}.${exec-name-version.minor}.${exec-name-version.patch}";
   src = ./.;
   meta = {
     # TODO: Update description
@@ -31,10 +31,9 @@ stdenv.mkDerivation rec {
   ];
 
   cmakeFlags = [
-    "-DPROJECT_NAME=${pname}"
-    # TODO: Rename exec-name
-    "-DPROJECT_VERSION=${exec-name-version.major}.${exec-name-version.minor}.${exec-name-version.patch}"
-    "-DTARGET_NAME=${pname}"
+    "-DPROJECT_NAME=${finalAttrs.pname}"
+    "-DPROJECT_VERSION=${finalAttrs.version}"
+    "-DTARGET_NAME=${finalAttrs.pname}"
     "-DCMAKE_BUILD_TYPE=${if debug then "Debug" else "Release"}"
   ]
   ++ lib.optional asan "-DENABLE_ASAN=ON"
@@ -47,4 +46,4 @@ stdenv.mkDerivation rec {
     "fortify"
     "pic"
   ];
-}
+})

@@ -6,14 +6,11 @@
   lib-name-version,
 }:
 
-let
+stdenv.mkDerivation {
   # TODO: Rename lib-name
-  project-name = "lib-name";
-in
-stdenv.mkDerivation rec {
-  pname = project-name;
+  pname = "lib-name";
   # TODO: Rename lib-name
-  version = "v${lib-name-version.major}.${lib-name-version.minor}.${lib-name-version.patch}";
+  version = "${lib-name-version.major}.${lib-name-version.minor}.${lib-name-version.patch}";
   src = ./.;
   meta = {
     # TODO: Update description

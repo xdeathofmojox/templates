@@ -7,6 +7,7 @@ set(PROJECT_NAME "DefaultProjectName" CACHE STRING "Project Name")
 set(PROJECT_VERSION "0.0.0" CACHE STRING "Project Version")
 # TODO: Rename lib-name
 set(TARGET_NAME "lib-name" CACHE STRING "Library Name")
+option(BUILD_STATIC "Build as static library" OFF)
 set(LIB_TYPE "SHARED")
 if(BUILD_STATIC)
     set(LIB_TYPE "STATIC")
@@ -17,9 +18,12 @@ if(NOT CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE Debug CACHE STRING "Build type" FORCE)
 endif()
 
-project(${PROJECT_NAME} 
-    VERSION ${PROJECT_VERSION} 
+project(${PROJECT_NAME}
+    VERSION ${PROJECT_VERSION}
     LANGUAGES CXX)
+
+include(GNUInstallDirs)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 #########################################
 # Sanitizer Options
@@ -32,12 +36,6 @@ option(ENABLE_UBSAN "Enable UndefinedBehaviorSanitizer" OFF)
 
 message(STATUS "Build type: ${CMAKE_BUILD_TYPE}")
 message(STATUS "ASAN: ${ENABLE_ASAN}, MSAN: ${ENABLE_MSAN}, TSAN: ${ENABLE_TSAN}, UBSAN: ${ENABLE_UBSAN}")
-if(CMAKE_BUILD_TYPE STREQUAL "Debug")
-    message(STATUS "Sanitizers will be applied")
-else()
-    message(STATUS "Sanitizers will not be applied in non-debug build type")
-endif()
-
 # Setup compile flags for sanitizers
 set(SANITIZER_FLAGS "")
 if(ENABLE_ASAN)
@@ -51,6 +49,14 @@ if(ENABLE_TSAN)
 endif()
 if(ENABLE_UBSAN)
     list(APPEND SANITIZER_FLAGS "-fsanitize=undefined")
+endif()
+
+if(SANITIZER_FLAGS)
+    if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+        message(STATUS "Sanitizers will be applied: ${SANITIZER_FLAGS}")
+    else()
+        message(WARNING "Sanitizers requested but will not be applied in non-Debug build type")
+    endif()
 endif()
 
 #########################################
@@ -84,11 +90,10 @@ target_include_directories(${TARGET_NAME} PUBLIC
 #########################################
 # set position independent code
 #########################################
-if(LIB_TYPE STREQUAL "SHARED")
-    set_target_properties(${TARGET_NAME} 
-        PROPERTIES POSITION_INDEPENDENT_CODE ON 
-        SOVERSION ${PROJECT_VERSION})
-endif()
+set_target_properties(${TARGET_NAME}
+    PROPERTIES POSITION_INDEPENDENT_CODE ON
+    VERSION ${PROJECT_VERSION}
+    SOVERSION ${PROJECT_VERSION_MAJOR})
 
 #########################################
 # compiler optimization
@@ -119,12 +124,6 @@ if(CMAKE_BUILD_TYPE STREQUAL "Debug")
     target_compile_options(${TARGET_NAME} PRIVATE ${SANITIZER_FLAGS})
     target_link_options(${TARGET_NAME} PRIVATE ${SANITIZER_FLAGS})
 endif()
-
-#########################################
-# export compile commands
-#########################################
-set_target_properties(${TARGET_NAME} 
-    PROPERTIES EXPORT_COMPILE_COMMANDS ON)
 
 #########################################
 # target c++ 20
