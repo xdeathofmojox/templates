@@ -23,9 +23,14 @@
         description = "A c++ library to add into an existing project";
       };
 
+      rust-cargo-crate = {
+        path = ./rust-cargo-crate;
+        description = "A rust cargo crate template";
+      };
+
       rust-cargo-workspace = {
         path = ./rust-cargo-workspace;
-        description = "A rust cargo workspace";
+        description = "A rust cargo workspace template";
       };
 
       zig-lib = {
