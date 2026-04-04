@@ -19,7 +19,7 @@ writeShellApplication {
 
     cmake "$WORK_DIR" -B "$CMAKE_DIR" -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
 
-    SOURCE_FILES=$(find "$WORK_DIR" \( -name "*.cc" -o -name "*.cpp" \))
+    SOURCE_FILES=$(find "$WORK_DIR" -name "*.c")
     if [ -n "$SOURCE_FILES" ]; then
       echo "$SOURCE_FILES" | xargs clang-tidy \
           -p "$CMAKE_DIR" \

@@ -1,0 +1,102 @@
+BasedOnStyle: Google
+AlignAfterOpenBracket: AlwaysBreak
+AlignArrayOfStructures: Right
+AlignConsecutiveAssignments:
+  Enabled: true
+  AcrossEmptyLines: false
+  AcrossComments: false
+  AlignCompound: true
+  PadOperators: true
+AlignConsecutiveBitFields:
+  Enabled: true
+  AcrossEmptyLines: false
+  AcrossComments: false
+AlignConsecutiveDeclarations:
+  Enabled: true
+  AcrossEmptyLines: false
+  AcrossComments: false
+  AlignFunctionPointers: false
+AlignConsecutiveMacros:
+  Enabled: true
+  AcrossEmptyLines: false
+  AcrossComments: false
+AlignConsecutiveShortCaseStatements:
+  Enabled: true
+  AcrossEmptyLines: false
+  AcrossComments: false
+  AlignCaseArrows: true
+  AlignCaseColons: true
+AlignEscapedNewlines: LeftWithLastLine
+AlignOperands: AlignAfterOperator
+AlignTrailingComments:
+  Kind: Always
+  OverEmptyLines: 1
+AllowAllArgumentsOnNextLine: true
+AllowAllParametersOfDeclarationOnNextLine: true
+AllowShortBlocksOnASingleLine: Empty
+AllowShortCaseLabelsOnASingleLine: false
+AllowShortEnumsOnASingleLine: false
+AllowShortFunctionsOnASingleLine: All
+AllowShortIfStatementsOnASingleLine: Never
+AllowShortLoopsOnASingleLine: false
+AlwaysBreakBeforeMultilineStrings: true
+BinPackArguments: false
+BinPackParameters: false
+BitFieldColonSpacing: Both
+BracedInitializerIndentWidth: 2
+BreakAdjacentStringLiterals: true
+BreakAfterAttributes: Never
+BreakAfterReturnType: ExceptShortType
+BreakArrays: false
+BreakBeforeBinaryOperators: All
+BreakBeforeBraces: Attach
+BreakBeforeTernaryOperators: true
+BreakFunctionDefinitionParameters: false
+BreakStringLiterals: true
+ColumnLimit: 180
+ContinuationIndentWidth: 2
+DerivePointerAlignment: true
+IndentCaseBlocks: false
+IndentCaseLabels: true
+IndentGotoLabels: false
+IndentPPDirectives: BeforeHash
+IndentWidth: 4
+IndentWrappedFunctionNames: true
+InsertBraces: true
+InsertNewlineAtEOF: true
+IntegerLiteralSeparator:
+  Binary: 4
+  Decimal: 3
+  Hex: 2
+KeepEmptyLines:
+  AtEndOfFile: false
+  AtStartOfBlock: false
+  AtStartOfFile: false
+Language: C
+LineEnding: LF
+MaxEmptyLinesToKeep: 1
+PPIndentWidth: 0
+PointerAlignment: Left
+QualifierAlignment: Leave
+ReferenceAlignment: Left
+ReflowComments: false
+RemoveParentheses: Leave
+RemoveSemicolon: false
+SeparateDefinitionBlocks: Always
+SortIncludes: CaseInsensitive
+SpaceAfterCStyleCast: true
+SpaceAfterLogicalNot: false
+SpaceAroundPointerQualifiers: Before
+SpaceBeforeAssignmentOperators: true
+SpaceBeforeCaseColon: false
+SpaceBeforeParens: Always
+SpaceBeforeSquareBrackets: false
+SpaceInEmptyBlock: false
+SpaceInEmptyParentheses: false
+SpacesBeforeTrailingComments: 2
+SpacesInAngles: Never
+SpacesInContainerLiterals: false
+SpacesInParens: Never
+SpacesInSquareBrackets: false
+TabWidth: 4
+UseTab: Never

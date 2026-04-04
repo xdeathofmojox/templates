@@ -1,0 +1,51 @@
+Checks:	'-*,
+  bugprone-*,
+  cert-*,
+  concurrency-*,
+  misc-*,
+  -misc-include-cleaner,
+  performance-*,
+  readability-*'
+ExtraArgs:
+  - -std=c23
+HeaderFileExtensions: ['', 'h']
+ImplementationFileExtensions: ['c']
+HeaderFilterRegex: 'include'
+FormatStyle: file
+UseColor: true
+CheckOptions:
+  - { key: bugprone-argument-comment.StrictMode,                                                           value: true       }
+  - { key: bugprone-argument-comment.CommentBoolLiterals,                                                  value: true       }
+  - { key: bugprone-argument-comment.CommentIntegerLiterals,                                               value: true       }
+  - { key: bugprone-argument-comment.CommentFloatLiterals,                                                 value: true       }
+  - { key: bugprone-argument-comment.CommentStringLiterals,                                                value: true       }
+  - { key: bugprone-argument-comment.CommentCharacterLiterals,                                             value: true       }
+  - { key: bugprone-argument-comment.CommentUserDefinedLiterals,                                           value: true       }
+  - { key: bugprone-argument-comment.CommentNullPtrs,                                                      value: true       }
+  - { key: bugprone-misplaced-widening-cast.CheckImplicitCasts,                                            value: true       }
+  - { key: bugprone-sizeof-expression.WarnOnSizeOfIntegerExpression,                                       value: true       }
+  - { key: bugprone-sizeof-expression.WarnOnSizeOfPointer,                                                 value: true       }
+  - { key: bugprone-suspicious-enum-usage.StrictMode,                                                      value: 1          }
+  - { key: bugprone-suspicious-string-compare.WarnOnLogicalNotComparison,                                  value: true       }
+  - { key: cert-str34-c.DiagnoseSignedUnsignedCharComparisons,                                             value: true       }
+  - { key: misc-unused-parameters.StrictMode,                                                              value: true       }
+  - { key: performance-type-promotion-in-math-fn.IncludeStyle,                                            value: google     }
+  - { key: readability-function-size.BranchThreshold,                                                     value: 4          }
+  - { key: readability-function-size.LineThreshold,                                                       value: 100        }
+  - { key: readability-function-size.NestingThreshold,                                                    value: 3          }
+  - { key: readability-function-size.ParameterThreshold,                                                  value: 4          }
+  - { key: readability-function-size.VariableThreshold,                                                   value: 8          }
+  - { key: readability-inconsistent-declaration-parameter-name.Strict,                                    value: true       }
+  - { key: readability-magic-numbers.IgnoredFloatingPointValues,                                          value: ''         }
+  - { key: readability-magic-numbers.IgnoredIntegerValues,                                                value: '0;1;'     }
+  - { key: readability-identifier-naming.VariableCase,                                                    value: lower_case }
+  - { key: readability-identifier-naming.LocalVariableCase,                                               value: lower_case }
+  - { key: readability-identifier-naming.GlobalVariableCase,                                              value: lower_case }
+  - { key: readability-identifier-naming.ParameterCase,                                                   value: lower_case }
+  - { key: readability-identifier-naming.FunctionCase,                                                    value: lower_case }
+  - { key: readability-identifier-naming.StructCase,                                                      value: lower_case }
+  - { key: readability-identifier-naming.EnumCase,                                                        value: lower_case }
+  - { key: readability-identifier-naming.EnumConstantCase,                                                value: UPPER_CASE }
+  - { key: readability-identifier-naming.MacroDefinitionCase,                                             value: UPPER_CASE }
+  - { key: readability-identifier-naming.GlobalConstantCase,                                              value: UPPER_CASE }
+  - { key: readability-identifier-naming.TypedefCase,                                                     value: lower_case }
