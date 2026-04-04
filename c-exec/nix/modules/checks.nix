@@ -25,8 +25,8 @@
           '';
         };
 
-        exec-name-cpp-check =
-          pkgs.runCommand "cpp-check"
+        exec-name-c-check =
+          pkgs.runCommand "c-check"
             {
               buildInputs = [
                 pkgs.cppcheck
@@ -38,7 +38,7 @@
               WORK_DIR=$(mktemp -d)
               cp -r ${pkgs.exec-name.src}/* $WORK_DIR
               cd $WORK_DIR
-              ${pkgs.cpp-check}/bin/cpp-check
+              ${pkgs.c-check}/bin/c-check
               mkdir -p $out
             '';
 

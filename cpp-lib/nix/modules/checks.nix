@@ -1,7 +1,7 @@
-{ inputs, ... }:
+{ ... }:
 {
   perSystem =
-    { pkgs, config, ... }:
+    { pkgs, ... }:
     {
       checks = {
         lib-name-unit-tests = pkgs.runCommand "unit-tests" { } ''
@@ -48,7 +48,6 @@
               mkdir -p $out
             '';
 
-        fmt-check = config.treefmt.build.check inputs.self;
       };
     };
 }
