@@ -1,0 +1,25 @@
+{ ... }:
+{
+  perSystem =
+    { ... }:
+    {
+      treefmt.config = {
+        projectRootFile = "flake.nix";
+
+        programs = {
+          clang-format.enable = true;
+          mdformat.enable = true;
+          nixfmt.enable = true;
+          rustfmt.enable = true;
+          shellcheck.enable = true;
+          shfmt.enable = true;
+          toml-sort = {
+            enable = true;
+            excludes = [ "**/Cargo.toml" ];
+          };
+        };
+
+        settings.global.excludes = [ ];
+      };
+    };
+}

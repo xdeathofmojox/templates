@@ -4,6 +4,7 @@
 
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable";
+    flake-parts.url = "github:hercules-ci/flake-parts";
     fenix.url = "github:nix-community/fenix";
     fenix.inputs.nixpkgs.follows = "nixpkgs";
     treefmt-nix.url = "github:numtide/treefmt-nix";
@@ -11,33 +12,14 @@
   };
 
   outputs =
-    {
-      self,
-      nixpkgs,
-      fenix,
-      treefmt-nix,
-    }:
-    let
-      lib = import ./nix/lib.nix {
-        inherit
-          self
-          nixpkgs
-          fenix
-          treefmt-nix
-          ;
-      };
-    in
-    {
-      legacyPackages = lib.forEachSupportedSystem (args: args.pkgs);
-
-      packages = lib.forEachSupportedSystem (args: import ./nix/packages.nix args.pkgs);
-
-      apps = lib.forEachSupportedSystem (args: import ./nix/apps.nix args.pkgs);
-
-      formatter = lib.forEachSupportedSystem (args: args.treefmtEval.config.build.wrapper);
-
-      devShells = lib.forEachSupportedSystem (args: import ./nix/devshells.nix args.pkgs);
-
-      overlays.default = import ./overlay.nix;
+    inputs@{ flake-parts, ... }:
+    flake-parts.lib.mkFlake { inherit inputs; } {
+      imports = [ ./nix/modules ];
+      systems = [
+        "x86_64-linux"
+        "aarch64-linux"
+        "x86_64-darwin"
+        "aarch64-darwin"
+      ];
     };
 }
