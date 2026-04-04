@@ -28,5 +28,5 @@ mkShell {
     iwyu
   ];
 
-  shellHook = '''';
+  shellHook = "";
 }
