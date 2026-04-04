@@ -1,0 +1,15 @@
+.zig-cache/
+.zig-out/
+zig-cache/
+zig-out/
+*.o
+*.obj
+*.exe
+*.dll
+*.so
+*.dylib
+
+result
+result-dev
+*/flake.lock
+.vscode/

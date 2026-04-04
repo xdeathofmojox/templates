@@ -43,6 +43,11 @@
         description = "A rust cargo workspace template";
       };
 
+      zig-exec = {
+        path = ./zig-exec;
+        description = "A zig executable template";
+      };
+
       zig-lib = {
         path = ./zig-lib;
         description = "A zig library template";
