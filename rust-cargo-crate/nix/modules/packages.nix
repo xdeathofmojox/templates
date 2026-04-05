@@ -1,12 +1,18 @@
 { ... }:
 {
   perSystem =
-    { pkgs, ... }:
+    {
+      pkgs,
+      craneLib,
+      commonArgs,
+      cargoArtifacts,
+      ...
+    }:
     {
       packages = {
+        default = craneLib.buildPackage (commonArgs // { inherit cargoArtifacts; });
         # TODO: Update crate-name
-        default = pkgs.crate-name;
-        inherit (pkgs) crate-name;
+        crate-name = craneLib.buildPackage (commonArgs // { inherit cargoArtifacts; });
       };
       legacyPackages = pkgs;
     };
