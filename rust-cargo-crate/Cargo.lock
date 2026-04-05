@@ -3,5 +3,5 @@
 version = 4
 
 [[package]]
-name = "crate_name"
+name = "crate-name"
 version = "0.1.0"
