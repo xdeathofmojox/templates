@@ -10,4 +10,4 @@ name = "workspace-name"
 
 [workspace.package]
 version = "0.1.0"
-license = "MIT"
+license = "Unlicense"
