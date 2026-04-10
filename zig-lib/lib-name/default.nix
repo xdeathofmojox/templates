@@ -2,15 +2,18 @@
   lib,
   stdenv,
   zig,
-  # TODO: Rename lib-name
-  lib-name-version,
 }:
 
+let
+  zonContent = builtins.readFile ./build.zig.zon;
+  zonFlat = builtins.replaceStrings [ "\n" ] [ " " ] zonContent;
+  versionMatch = builtins.match ''.*\.version = "([0-9]+\.[0-9]+\.[0-9]+)".*'' zonFlat;
+  version = builtins.head versionMatch;
+in
 stdenv.mkDerivation {
   # TODO: Rename lib-name
   pname = "lib-name";
-  # TODO: Rename lib-name
-  version = "${lib-name-version.major}.${lib-name-version.minor}.${lib-name-version.patch}";
+  inherit version;
   src = ./.;
   meta = {
     # TODO: Update description

@@ -1,8 +1,16 @@
 { ... }:
 {
   perSystem =
-    { pkgs, ... }:
+    { pkgs, fenix, ... }:
+    let
+      zigInputs = with pkgs; [
+        zig
+        zls
+      ];
+    in
     {
-      devShells.default = pkgs.callPackage ../../exec-name/devshell.nix { };
+      devShells = {
+        default = pkgs.mkShell { buildInputs = zigInputs; };
+      };
     };
 }
